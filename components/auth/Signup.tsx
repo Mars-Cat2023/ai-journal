@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Alert, StyleSheet, View } from 'react-native'
 import { Button, Input } from '@rneui/themed'
-import { signInWithEmail, signUpWithEmail } from '@/lib/Auth'
+import { signInWithEmail, signUpWithEmail, signOut } from '@/lib/Auth'
 
 export default function Auth() {
   const [email, setEmail] = useState('')
@@ -14,7 +14,7 @@ export default function Auth() {
         <Input
           label="Email"
           leftIcon={{ type: 'font-awesome', name: 'envelope' }}
-          onChangeText={(text) => setEmail(text)}
+          onChangeText={(text: any) => setEmail(text)}
           value={email}
           placeholder="email@address.com"
           autoCapitalize={'none'}
@@ -24,7 +24,7 @@ export default function Auth() {
         <Input
           label="Password"
           leftIcon={{ type: 'font-awesome', name: 'lock' }}
-          onChangeText={(text) => setPassword(text)}
+          onChangeText={(text: any) => setPassword(text)}
           value={password}
           secureTextEntry={true}
           placeholder="Password"
@@ -36,6 +36,9 @@ export default function Auth() {
       </View>
       <View style={styles.verticallySpaced}>
         <Button title="Sign up" disabled={loading} onPress={() => signUpWithEmail(email, password)} />
+      </View>
+      <View style={[styles.verticallySpaced, styles.mt20]}>
+        <Button title="Sign out" disabled={loading} onPress={() => signOut()} />
       </View>
     </View>
   )
