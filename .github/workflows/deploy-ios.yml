@@ -1,0 +1,45 @@
+name: Deploy iOS
+
+on:
+  push:
+    branches:
+      - deployment-workflow
+  pull_request:
+    branches:
+      - deployment-workflow
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install CocoaPods
+        run: |
+          cd ios
+          pod install
+
+      - name: Build iOS
+        run: |
+          xcodebuild -workspace ios/YourAppName.xcworkspace -scheme YourAppName -sdk iphoneos -configuration AppStoreDistribution archive -archivePath $PWD/build/YourAppName.xcarchive
+          xcodebuild -exportArchive -archivePath $PWD/build/YourAppName.xcarchive -exportOptionsPlist ios/exportOptions.plist -exportPath $PWD/build
+
+      - name: Upload iOS Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ios-release
+          path: ios/build/*.ipa

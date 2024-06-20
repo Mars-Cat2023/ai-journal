@@ -1,7 +1,9 @@
 {
+  "name": "OneVoiceEcho",
+  "displayName": "OneVoiceEcho",
   "expo": {
-    "name": "One-Voice-Echo",
-    "slug": "One-Voice-Echo",
+    "name": "OneVoiceEcho",
+    "slug": "OneVoiceEcho",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -19,7 +21,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.anonymous.OneVoiceEcho"
     },
     "web": {
       "bundler": "metro",
