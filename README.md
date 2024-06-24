@@ -135,5 +135,3 @@ Before making any changes, create a new branch:
 - [Prettier Documentation](https://prettier.io/docs/en/index.html)
 - [ESLint Documentation](https://eslint.org/docs/user-guide/getting-started)
 - [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
-
-
