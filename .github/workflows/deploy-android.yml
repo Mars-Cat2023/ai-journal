@@ -1,8 +1,9 @@
 name: Build Android
 
 on:
-  workflow_dispatch:
-    branches: [deployment-workflow]
+  push:
+    branches:
+      - deployment-workflow
 
 jobs:
   build:
