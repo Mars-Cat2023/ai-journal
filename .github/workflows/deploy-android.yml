@@ -1,9 +1,8 @@
 name: Build Android
 
 on:
-  push:
-    branches:
-      - deployment-workflow
+  workflow_dispatch:
+    branches: [deployment-workflow]
 
 jobs:
   build:
@@ -13,10 +12,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 20.15.0
+
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
           java-version: '11'
+          distribution: "adopt"
+          cache: "gradle"
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
 
       - name: Install dependencies
         run: npm install

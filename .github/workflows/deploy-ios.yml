@@ -1,12 +1,8 @@
 name: Deploy iOS
 
 on:
-  push:
-    branches:
-      - deployment-workflow
-  pull_request:
-    branches:
-      - deployment-workflow
+  workflow_dispatch:
+    branches: [deployment-workflow]
 
 jobs:
   build:
@@ -14,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [20.14.0]
 
     steps:
       - name: Checkout repository
