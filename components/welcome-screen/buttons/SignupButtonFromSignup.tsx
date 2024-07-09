@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {Link} from 'expo-router';
-import {signUpWithEmail} from '@/lib/Auth';
+import {signupWithEmail} from '@/lib/Auth';
 
 interface SignupButtonProps {
   email: string;
@@ -14,7 +14,7 @@ const SignupButton: React.FC<SignupButtonProps> = ({email, password, loading}) =
     <Link href="/undefined" asChild>
       <TouchableOpacity style={styles.button}>
         <Text style={styles.text} 
-              onPress={() => signUpWithEmail(email, password)}
+              onPress={() => signupWithEmail(email, password)}
               disabled={loading}>Sign up</Text>
       </TouchableOpacity>
     </Link>

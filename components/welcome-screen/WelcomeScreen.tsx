@@ -1,5 +1,5 @@
 import {Image, StyleSheet, View, Text, Dimensions} from 'react-native';
-import SignupButton from '@/components/welcome-screen/buttons/SignupButtonToSignUp';
+import SignupButton from '@/components/welcome-screen/buttons/SignupButtonToSignup';
 import SigninButton from '@/components/welcome-screen/buttons/SigninButtonToLogin';
 const {width, height} = Dimensions.get('window');
 

@@ -2,7 +2,7 @@ import {Link} from 'expo-router';
 import React from 'react';
 import {Text, TouchableOpacity, StyleSheet} from 'react-native';
 
-const SigninButton = () => {
+const LoginButton = () => {
   return (
     <Link href="/(auth)/login" asChild>
       <TouchableOpacity style={styles.button}>
@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SigninButton;
+export default LoginButton;

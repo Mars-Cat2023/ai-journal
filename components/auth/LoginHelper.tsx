@@ -1,7 +1,7 @@
 // import React, {useState} from 'react';
 // import {Image, StyleSheet, View, Text, Dimensions} from 'react-native';
 // import {Button, Input} from '@rneui/themed';
-// import {signInWithEmail, signUpWithEmail, signOut} from '@/lib/Auth';
+// import {loginWithEmail, signupWithEmail, signOut} from '@/lib/Auth';
 
 
 // const {width, height} = Dimensions.get('window');
@@ -27,7 +27,7 @@
 //   //       <Image
 //   //         style={[]}
 //   //         resizeMode="contain"
-//   //         source={require('../../assets/images/SignUp/SignUp-Logo1.png')}
+//   //         source={require('../../assets/images/Signup/Signup-Logo1.png')}
 //   //       />
 //   //     </View>
 
@@ -66,7 +66,7 @@
 //   //       <Button
 //   //         title="Sign up"
 //   //         disabled={loading}
-//   //         onPress={() => signUpWithEmail(email, password)}
+//   //         onPress={() => signupWithEmail(email, password)}
 //   //       />
 //   //     </View>
 //   //   </View>
@@ -77,7 +77,7 @@
 //         <Image
 //           style={[]}
 //           resizeMode="contain"
-//           source={require('../../assets/images/SignUp/SignUp-Logo1.png')}
+//           source={require('../../assets/images/Signup/Signup-Logo1.png')}
 //         />
 //       </View>
 
@@ -116,7 +116,7 @@
 //         <Button
 //           title="Sign up"
 //           disabled={loading}
-//           onPress={() => signUpWithEmail(email, password)}
+//           onPress={() => signupWithEmail(email, password)}
 //         />
 //       </View>
 //     </View>

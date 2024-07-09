@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Image, StyleSheet, View, Text, Dimensions} from 'react-native';
 import {Button, Input} from '@rneui/themed';
-import SignupButton from '@/components/welcome-screen/buttons/SignupButtonFromSignUp';
+import SignupButton from '@/components/welcome-screen/buttons/SignupButtonFromSignup';
 
 
 const {width, height} = Dimensions.get('window');
@@ -25,7 +25,7 @@ export default function Auth() {
   //       <Image
   //         style={[]}
   //         resizeMode="contain"
-  //         source={require('../../assets/images/SignUp/SignUp-Logo1.png')}
+  //         source={require('../../assets/images/Signup/Signup-Logo1.png')}
   //       />
   //     </View>
 
@@ -64,7 +64,7 @@ export default function Auth() {
   //       <Button
   //         title="Sign up"
   //         disabled={loading}
-  //         onPress={() => signUpWithEmail(email, password)}
+  //         onPress={() => signupWithEmail(email, password)}
   //       />
   //     </View>
   //   </View>
@@ -75,7 +75,7 @@ export default function Auth() {
         <Image
           style={[]}
           resizeMode="contain"
-          source={require('../../assets/images/SignUp/SignUp-Logo1.png')}
+          source={require('../../assets/images/Signup/Signup-Logo1.png')}
         />
       </View>
 
@@ -119,17 +119,17 @@ export default function Auth() {
           <Image
             style={[styles.logoF]}
             resizeMode="contain"
-            source={require('../../assets/images/SignUp/SignUp-Logof.jpg')}
+            source={require('../../assets/images/Signup/Signup-Logof.jpg')}
           />
           <Image
             style={[styles.logoF]}
             resizeMode="contain"
-            source={require('../../assets/images/SignUp/SignUp-Logof.jpg')}
+            source={require('../../assets/images/Signup/Signup-Logof.jpg')}
           />
           <Image
             style={[styles.logoF]}
             resizeMode="contain"
-            source={require('../../assets/images/SignUp/SignUp-Logof.jpg')}
+            source={require('../../assets/images/Signup/Signup-Logof.jpg')}
           />
         </View>
         <Text style={[styles.textSmall]}>Already have an accounts? Log in</Text>

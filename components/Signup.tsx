@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Input } from '@rneui/themed'
 import {Image, StyleSheet, View, Text, Dimensions} from 'react-native';
-import SignupButton from '@/components/welcome-screen/buttons/SignupButtonToSignUp';
+import SignupButton from '@/components/welcome-screen/buttons/SignupButtonToSignup';
 
 const {width, height} = Dimensions.get('window');
 
@@ -11,7 +11,7 @@ const window_height = height;
 const alpha = [0.04 * window_height, 0.1 * window_height, 0.5 * window_height, 1.0 * window_height];
 // const beta = [0.0 * window_width, 0.2 * window_width, 0.8 * window_width, 1.0 * window_width];
 
-const SignUp = () => {
+const Signup = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -23,7 +23,7 @@ const SignUp = () => {
         <Image
           style={[]}
           resizeMode="contain"
-          source={require('../assets/images/SignUp/SignUp-Logo1.png')}
+          source={require('../assets/images/Signup/Signup-Logo1.png')}
         />
       </View>
 
@@ -116,4 +116,4 @@ const styles = StyleSheet.create({
   
 });
 
-export default SignUp;
+export default Signup;

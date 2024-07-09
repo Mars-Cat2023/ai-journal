@@ -7,7 +7,7 @@ import {supabase} from './supabase';
  * @param {string} password - the password to signup with
  *
  */
-export async function signUpWithEmail(email: string, password: string) {
+export async function signupWithEmail(email: string, password: string) {
   const {
     data: {session},
     error,
@@ -33,7 +33,7 @@ export async function signUpWithEmail(email: string, password: string) {
  * @param {string} email - the email to sign in with
  * @param {string} password - the password to sign in with
  */
-export async function signInWithEmail(email: string, password: string) {
+export async function loginWithEmail(email: string, password: string) {
   const {error} = await supabase.auth.signInWithPassword({
     email: email,
     password: password,

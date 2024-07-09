@@ -1,7 +1,7 @@
 // import React, { useState } from 'react'
 // import { Button, Input } from '@rneui/themed'
 // import {Image, StyleSheet, View, Text, Dimensions} from 'react-native';
-// import SigninButton from '@/components/welcome-screen/buttons/SigninButtonToLogin';
+// import LoginButton from '@/components/welcome-screen/buttons/LoginButtonToLogin';
 
 // const {width, height} = Dimensions.get('window');
 
@@ -11,7 +11,7 @@
 // const alpha = [0.04 * window_height, 0.1 * window_height, 0.5 * window_height, 1.0 * window_height];
 // // const beta = [0.0 * window_width, 0.2 * window_width, 0.8 * window_width, 1.0 * window_width];
 
-// const SignUp = () => {
+// const Signup = () => {
 //   const [email, setEmail] = useState('')
 //   const [password, setPassword] = useState('')
 //   const [loading, setLoading] = useState(false)
@@ -59,7 +59,7 @@
 //       </View>
       
 //       <View style={styles.Container3}>
-//         <SigninButton />
+//         <LoginButton />
 //       </View>
 //     </View>
 //   );

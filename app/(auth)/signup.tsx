@@ -7,7 +7,7 @@ const window_width = width;
 const window_height = height;
 
 
-function SignUp() {
+function Signupp() {
   return (
     <View style={[styles.Screen]}>
       <Signup />
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignUp;
+export default Signupp;
