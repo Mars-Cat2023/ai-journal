@@ -1,150 +1,174 @@
-// import React, {useState} from 'react';
-// import {Image, StyleSheet, View, Text, Dimensions} from 'react-native';
-// import {Button, Input} from '@rneui/themed';
-// import {loginWithEmail, signupWithEmail, signOut} from '@/lib/Auth';
+import React, {useState} from 'react';
+import {Image, StyleSheet, View, Text, Dimensions} from 'react-native';
+import {Button, Input} from '@rneui/themed';
+import LoginButton from '@/components/auth/buttons/LoginButtonFromLogin';
 
 
-// const {width, height} = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 
-// const window_width = width;
-// const window_height = height;
+const window_width = width;
+const window_height = height;
 
-// const alpha = [0.04 * window_height, 0.1 * window_height, 0.5 * window_height, 1.0 * window_height];
-// // const beta = [0.0 * window_width, 0.2 * window_width, 0.8 * window_width, 1.0 * window_width];
+const alpha = [0.04 * window_height, 0.1 * window_height, 0.5 * window_height, 1.0 * window_height];
+const beta = [0.0 * window_width, 0.2 * window_width, 0.8 * window_width, 1.0 * window_width];
 
 
-// export default function Auth() {
-//   const [email, setEmail] = useState('');
-//   const [password, setPassword] = useState('');
-//   const [loading, setLoading] = useState(false);
-//   const [selected, setSelected] = useState(false);
+export default function Auth() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [selected, setSelected] = useState(false);
 
-//   console.log(window_width, window_height);
-  
-//   // return (
-//   //   <View style={styles.Container}>
-//   //     <View style={styles.Container1}>
-//   //       <Image
-//   //         style={[]}
-//   //         resizeMode="contain"
-//   //         source={require('../../assets/images/Signup/Signup-Logo1.png')}
-//   //       />
-//   //     </View>
+  return (
+    <View style={[styles.container]}>
+      <View style={[styles.container1]}>
+        <Image
+          style={[]}
+          resizeMode="contain"
+          source={require('../../assets/images/User/User-Logoo.png')}
+        />
+      </View>
 
-//   //     <View style={[styles.Container2]}> 
-//   //       <Text style={[styles.Text21]}>Create an Account</Text>
-//   //       <View style={[styles.Container21]}>
-//   //         <View >
-//   //           <Input
-//   //             label="Email"
-//   //             leftIcon={{ type: 'font-awesome', name: 'envelope' }}
-//   //             onChangeText={(text: any) => setEmail(text)}
-//   //             value={email}
-//   //             placeholder="email@address.com"
-//   //             autoCapitalize={'none'}
-//   //           />
-//   //         </View>
-//   //         <View >
-//   //           <Input
-//   //             label="Password"
-//   //             leftIcon={{ type: 'font-awesome', name: 'lock' }}
-//   //             onChangeText={(text: any) => setPassword(text)}
-//   //             value={password}
-//   //             secureTextEntry={true}
-//   //             placeholder="Password"
-//   //             autoCapitalize={'none'}
-//   //           />
-//   //         </View>
-//   //         <Text style={[styles.Text22]}>Password must be at least 8 characters and contain a letter and a number.</Text>
-//   //         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-//   //           <Text>By clicking Sign Up, you acknowledge that you have read the Privacy Policy and agree to the Terms of Service</Text>
-//   //         </View>
-//   //       </View>
-//   //     </View>
+      <View style={[styles.container2]}> 
+        <Text style={[styles.textCreate]}>Login</Text>
+        <View style={[]}>
+          <View style={[]}>
+            <Input
+              leftIcon={{ type: 'font-awesome', name: 'envelope' }}
+              onChangeText={(text: any) => setEmail(text)}
+              value={email}
+              placeholder="email@address.com"
+              autoCapitalize={'none'}
+            />
+          </View>
+          <View style={[]}>
+            <Input
+              leftIcon={{ type: 'font-awesome', name: 'lock' }}
+              onChangeText={(text: any) => setPassword(text)}
+              value={password}
+              secureTextEntry={true}
+              placeholder="Password"
+              autoCapitalize={'none'}
+            />
+          </View>
+        </View>
+        <View style={[styles.buttonContainer1]}>
+          <LoginButton email={email} password={password} loading={loading}/>
+        </View>
+        <Text style={[styles.textMiddle]}>Forgot Password?</Text>
+      </View>
       
-//   //     <View style={styles.Container3}>
-//   //       <Button
-//   //         title="Sign up"
-//   //         disabled={loading}
-//   //         onPress={() => signupWithEmail(email, password)}
-//   //       />
-//   //     </View>
-//   //   </View>
-//   // );
-//   return (
-//     <View style={[styles.container]}>
-//       <View style={[styles.container1]}>
-//         <Image
-//           style={[]}
-//           resizeMode="contain"
-//           source={require('../../assets/images/Signup/Signup-Logo1.png')}
-//         />
-//       </View>
+      <View style={[styles.container3]}>
+        <View style={[styles.buttonContainer2]}>
+          <Text style={[styles.textSmall]}>-------------------- or sign in with --------------------</Text>
+        </View>
+        <View style={[styles.buttonContainer3]}>
+          <Image
+            style={[styles.logoF]}
+            resizeMode="contain"
+            source={require('../../assets/images/User/User-Logog.png')}
+          />
+          <Image
+            style={[styles.logoF]}
+            resizeMode="contain"
+            source={require('../../assets/images/User/User-Logof.jpg')}
+          />
+          <Image
+            style={[styles.logoF]}
+            resizeMode="contain"
+            source={require('../../assets/images/User/User-Logoa.jpg')}
+          />
+        </View>
+        <Text style={[styles.textSmall]}>Don’t have an account? Sign Up</Text>
+        <Text style={[styles.textBottom2]}>Terms of Use | Privacy Policy</Text>
+      </View>
+    </View>
+  );
+}
 
-//       <View style={[styles.container2]}> 
-//         <Text style={[]}>Create an Account</Text>
-//         <View style={[]}>
-//           <View >
-//             <Input
-//               label="Email"
-//               leftIcon={{ type: 'font-awesome', name: 'envelope' }}
-//               onChangeText={(text: any) => setEmail(text)}
-//               value={email}
-//               placeholder="email@address.com"
-//               autoCapitalize={'none'}
-//             />
-//           </View>
-//           <View >
-//             <Input
-//               label="Password"
-//               leftIcon={{ type: 'font-awesome', name: 'lock' }}
-//               onChangeText={(text: any) => setPassword(text)}
-//               value={password}
-//               secureTextEntry={true}
-//               placeholder="Password"
-//               autoCapitalize={'none'}
-//             />
-//           </View>
-//           <Text style={[]}>Password must be at least 8 characters and contain a letter and a number.</Text>
-//           <View style={[]}>
-//             <Text>By clicking Sign Up, you acknowledge that you have read the Privacy Policy and agree to the Terms of Service</Text>
-//           </View>
-//         </View>
-//       </View>
-      
-//       <View style={[styles.container3]}>
-//         <Button
-//           title="Sign up"
-//           disabled={loading}
-//           onPress={() => signupWithEmail(email, password)}
-//         />
-//       </View>
-//     </View>
-//   );
-// }
+/*
+Qilong: Still need to find a new way for "Checkbox": 
+  <CheckBox
+  value={selected}
+  onValueChange={setSelected}
+  style={[styles.Text22]}/> 
+*/
 
-// /*
-// Qilong: Still need to find a new way for "Checkbox": 
-//   <CheckBox
-//   value={selected}
-//   onValueChange={setSelected}
-//   style={[styles.Text22]}/> 
-// */
-
-// const styles = StyleSheet.create({
-//   container: {
-//     justifyContent: 'space-around',
-//     padding: 20,
-//     flexDirection: 'column',
-//     backgroundColor: 'green',
-//   },
-//   container1: {
-//     flex: 1,
-//   },
-//   container2: {
-//     flex: 10,
-//   },
-//   container3: {
-//     flex: 3,
-//   }  
-// });
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'space-around',
+    padding: 20,
+    flexDirection: 'column',
+    backgroundColor: 'white',
+    flex: 1,
+  },
+  container1: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+  },
+  textCreate: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    textAlign: 'left',
+    fontFamily: 'Poppins',
+    marginTop: 10,
+  },
+  textSmall: {
+    fontSize: 12,
+  },
+  textMiddle: {
+    fontSize: 12,
+    textAlign: 'center',
+    marginTop: 20,
+  },
+  textBottom: {
+    marginTop: 120,
+    fontSize: 12,
+  },
+  textBottom2: {
+    marginTop: 180,
+    fontSize: 12,
+  },
+  container2: {
+    flex: 8,
+    justifyContent: 'center',
+    flexDirection: 'column',
+  },
+  container3: {
+    flex: 10,
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  buttonContainer1: {
+    marginTop: 0,
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%',
+    gap: 10,
+  },
+  buttonContainer2: {
+    marginTop: 50,
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%',
+    gap: 10,
+  },
+  buttonContainer3: {
+    marginTop: 20,
+    marginBottom: 20, 
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '60%',
+    gap: 10,
+  },
+  logoF: {
+    width: 50,
+    height: 50,
+    borderRadius: 30,
+  },
+});

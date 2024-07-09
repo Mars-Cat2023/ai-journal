@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import {Image, StyleSheet, View, Text, Dimensions} from 'react-native';
 import {Button, Input} from '@rneui/themed';
-import SignupButton from '@/components/welcome-screen/buttons/SignupButtonFromSignup';
-
+import SignupButton from '@/components/auth/buttons/SignupButtonFromSignup';
 
 const {width, height} = Dimensions.get('window');
 
@@ -10,7 +9,7 @@ const window_width = width;
 const window_height = height;
 
 const alpha = [0.04 * window_height, 0.1 * window_height, 0.5 * window_height, 1.0 * window_height];
-// const beta = [0.0 * window_width, 0.2 * window_width, 0.8 * window_width, 1.0 * window_width];
+const beta = [0.0 * window_width, 0.2 * window_width, 0.8 * window_width, 1.0 * window_width];
 
 
 export default function Auth() {
@@ -19,63 +18,13 @@ export default function Auth() {
   const [loading, setLoading] = useState(false);
   const [selected, setSelected] = useState(false);
   
-  // return (
-  //   <View style={styles.Container}>
-  //     <View style={styles.Container1}>
-  //       <Image
-  //         style={[]}
-  //         resizeMode="contain"
-  //         source={require('../../assets/images/Signup/Signup-Logo1.png')}
-  //       />
-  //     </View>
-
-  //     <View style={[styles.Container2]}> 
-  //       <Text style={[styles.Text21]}>Create an Account</Text>
-  //       <View style={[styles.Container21]}>
-  //         <View >
-  //           <Input
-  //             label="Email"
-  //             leftIcon={{ type: 'font-awesome', name: 'envelope' }}
-  //             onChangeText={(text: any) => setEmail(text)}
-  //             value={email}
-  //             placeholder="email@address.com"
-  //             autoCapitalize={'none'}
-  //           />
-  //         </View>
-  //         <View >
-  //           <Input
-  //             label="Password"
-  //             leftIcon={{ type: 'font-awesome', name: 'lock' }}
-  //             onChangeText={(text: any) => setPassword(text)}
-  //             value={password}
-  //             secureTextEntry={true}
-  //             placeholder="Password"
-  //             autoCapitalize={'none'}
-  //           />
-  //         </View>
-  //         <Text style={[styles.Text22]}>Password must be at least 8 characters and contain a letter and a number.</Text>
-  //         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-  //           <Text>By clicking Sign Up, you acknowledge that you have read the Privacy Policy and agree to the Terms of Service</Text>
-  //         </View>
-  //       </View>
-  //     </View>
-      
-  //     <View style={styles.Container3}>
-  //       <Button
-  //         title="Sign up"
-  //         disabled={loading}
-  //         onPress={() => signupWithEmail(email, password)}
-  //       />
-  //     </View>
-  //   </View>
-  // );
   return (
     <View style={[styles.container]}>
       <View style={[styles.container1]}>
         <Image
           style={[]}
           resizeMode="contain"
-          source={require('../../assets/images/Signup/Signup-Logo1.png')}
+          source={require('../../assets/images/User/User-Logoo.png')}
         />
       </View>
 
@@ -101,9 +50,9 @@ export default function Auth() {
               autoCapitalize={'none'}
             />
           </View>
-          <Text style={[styles.textSmall]}>Password must be at least 8 characters and contain a letter and a number.</Text>
+          <Text style={[styles.textSmall, styles.grey]}>Password must be at least 8 characters and contain a letter and a number.</Text>
           <View style={[]}>
-            <Text style={[styles.textSmall]}>By clicking Sign Up, you acknowledge that you have read the Privacy Policy and agree to the Terms of Service</Text>
+            <Text style={[styles.textSmall, styles.grey]}>By clicking Sign Up, you acknowledge that you have read the Privacy Policy and agree to the Terms of Service</Text>
           </View>
         </View>
       </View>
@@ -119,17 +68,17 @@ export default function Auth() {
           <Image
             style={[styles.logoF]}
             resizeMode="contain"
-            source={require('../../assets/images/Signup/Signup-Logof.jpg')}
+            source={require('../../assets/images/User/User-Logog.png')}
           />
           <Image
             style={[styles.logoF]}
             resizeMode="contain"
-            source={require('../../assets/images/Signup/Signup-Logof.jpg')}
+            source={require('../../assets/images/User/User-Logof.jpg')}
           />
           <Image
             style={[styles.logoF]}
             resizeMode="contain"
-            source={require('../../assets/images/Signup/Signup-Logof.jpg')}
+            source={require('../../assets/images/User/User-Logoa.jpg')}
           />
         </View>
         <Text style={[styles.textSmall]}>Already have an accounts? Log in</Text>
@@ -214,5 +163,8 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 30,
-  }
+  },
+  grey: {
+    color: '#6C757D'
+  },
 });

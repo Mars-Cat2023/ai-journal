@@ -1,119 +1,122 @@
-// import React, { useState } from 'react'
-// import { Button, Input } from '@rneui/themed'
-// import {Image, StyleSheet, View, Text, Dimensions} from 'react-native';
-// import LoginButton from '@/components/welcome-screen/buttons/LoginButtonToLogin';
+import React, { useState } from 'react'
+import { Button, Input } from '@rneui/themed'
+import {Image, StyleSheet, View, Text, Dimensions} from 'react-native';
+import LoginButton from '@/components/auth/buttons/LoginButtonToLogin';
 
-// const {width, height} = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 
-// const window_width = width;
-// const window_height = height;
+const window_width = width;
+const window_height = height;
 
-// const alpha = [0.04 * window_height, 0.1 * window_height, 0.5 * window_height, 1.0 * window_height];
-// // const beta = [0.0 * window_width, 0.2 * window_width, 0.8 * window_width, 1.0 * window_width];
+const alpha = [0.04 * window_height, 0.1 * window_height, 0.5 * window_height, 1.0 * window_height];
+const beta = [0.0 * window_width, 0.2 * window_width, 0.8 * window_width, 1.0 * window_width];
 
-// const Signup = () => {
-//   const [email, setEmail] = useState('')
-//   const [password, setPassword] = useState('')
-//   const [loading, setLoading] = useState(false)
-//   const [selected, setSelected] = useState(false)
+const Login = () => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [selected, setSelected] = useState(false)
 
-//   return (
-//     <View style={styles.Container}>
-//       <View style={styles.Container1}>
-//         <Image
-//           style={[]}
-//           resizeMode="contain"
-//           source={require('../assets/images/SignUp/SignUp-Logo1.png')}
-//         />
-//       </View>
+  return (
+    <View style={styles.container}>
+      <View style={styles.container1}>
+        <Image
+          style={[]}
+          resizeMode="contain"
+          source={require('../assets/images/User/User-Logoo.png')}
+        />
+      </View>
 
-//       <View style={[styles.Container2]}> 
-//         <Text style={[styles.Text21]}>Create an Account</Text>
-//         <View style={[styles.Container21]}>
-//           <View >
-//             <Input
-//               label="Email"
-//               leftIcon={{ type: 'font-awesome', name: 'envelope' }}
-//               onChangeText={(text: any) => setEmail(text)}
-//               value={email}
-//               placeholder="email@address.com"
-//               autoCapitalize={'none'}
-//             />
-//           </View>
-//           <View >
-//             <Input
-//               label="Password"
-//               leftIcon={{ type: 'font-awesome', name: 'lock' }}
-//               onChangeText={(text: any) => setPassword(text)}
-//               value={password}
-//               secureTextEntry={true}
-//               placeholder="Password"
-//               autoCapitalize={'none'}
-//             />
-//           </View>
-//           <Text style={[styles.Text22]}>Password must be at least 8 characters and contain a letter and a number.</Text>
-//           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-//             <Text>By clicking Sign Up, you acknowledge that you have read the Privacy Policy and agree to the Terms of Service</Text>
-//           </View>
-//         </View>
-//       </View>
+      <View style={[styles.container2]}> 
+        <Text style={[styles.text21]}>Login</Text>
+        <View style={[styles.container21]}>
+          <View >
+            <Input
+              label="Email"
+              leftIcon={{ type: 'font-awesome', name: 'envelope' }}
+              onChangeText={(text: any) => setEmail(text)}
+              value={email}
+              placeholder="email@address.com"
+              autoCapitalize={'none'}
+            />
+          </View>
+          <View >
+            <Input
+              label="Password"
+              leftIcon={{ type: 'font-awesome', name: 'lock' }}
+              onChangeText={(text: any) => setPassword(text)}
+              value={password}
+              secureTextEntry={true}
+              placeholder="Password"
+              autoCapitalize={'none'}
+            />
+          </View>
+          <Text style={[styles.text22]}>Password must be at least 8 characters and contain a letter and a number.</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Text>By clicking Sign Up, you acknowledge that you have read the Privacy Policy and agree to the Terms of Service</Text>
+          </View>
+        </View>
+      </View>
       
-//       <View style={styles.Container3}>
-//         <LoginButton />
-//       </View>
-//     </View>
-//   );
-// };
+      <View style={styles.container3}>
+        <LoginButton />
+      </View>
+    </View>
+  );
+};
 
-// const styles = StyleSheet.create({
-//   Container: {
-//     justifyContent: 'space-around',
-//     alignItems: 'center',
-//     width: '100%',
-//     gap: 10,
-//   },
-//   Container1: {
-//     position: 'absolute',
-//     top: alpha[0],
-//     bottom: alpha[1],
-//     justifyContent: 'space-around',
-//     alignItems: 'center',
-//     width: '100%',
-//     gap: 10,
-//   },
-//   Container2: {
-//     position: 'absolute',
-//     top: alpha[1],
-//     bottom: alpha[2],
-//     justifyContent: 'space-around',
-//     alignItems: 'center',
-//     width: '100%',
-//     gap: 10,
-//   },
-//   Container21: {
-//     alignItems: 'center',
-//   },
-//   Container3: {
-//     position: 'absolute',
-//     top: alpha[2],
-//     bottom: alpha[3],
-//     justifyContent: 'space-around',
-//     alignItems: 'center',
-//     width: '100%',
-//     gap: 10,
-//   },
-//   Text21: {
-//     fontSize: 28,
-//     fontFamily: 'Poppins',
-//     textAlign: 'left',
-//     marginTop: 0,
-//   },
-//   Text22: {
-//     fontSize: 12,
-//     fontFamily: 'Poppins',
-//     marginTop: 0,
-//   }
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%',
+    gap: 10,
+  },
+  container1: {
+    position: 'absolute',
+    top: alpha[0],
+    bottom: alpha[1],
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%',
+    gap: 10,
+  },
+  container2: {
+    position: 'absolute',
+    top: alpha[1],
+    bottom: alpha[2],
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%',
+    gap: 10,
+  },
+  container21: {
+    alignItems: 'center',
+    borderColor: '#000',
+    borderWidth: 1,
+    borderRadius: 20,
+  },
+  container3: {
+    position: 'absolute',
+    top: alpha[2],
+    bottom: alpha[3],
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%',
+    gap: 10,
+  },
+  text21: {
+    fontSize: 28,
+    fontFamily: 'Poppins',
+    textAlign: 'left',
+    marginTop: 0,
+  },
+  text22: {
+    fontSize: 12,
+    fontFamily: 'Poppins',
+    marginTop: 0,
+  }
   
-// });
+});
 
-// export default SignUp;
+export default Login;

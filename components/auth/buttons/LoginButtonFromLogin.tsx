@@ -1,12 +1,21 @@
-import {Link} from 'expo-router';
 import React from 'react';
 import {Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {Link} from 'expo-router';
+import {loginWithEmail} from '@/lib/Auth';
 
-const LoginButton = () => {
+interface LoginButtonProps {
+  email: string;
+  password: string;
+  loading: boolean;
+}
+
+const LoginButton: React.FC<LoginButtonProps> = ({email, password, loading}) => {
   return (
-    <Link href="/(auth)/login" asChild>
+    <Link href="/+not-found" asChild>
       <TouchableOpacity style={styles.button}>
-        <Text style={styles.text}>Login</Text>
+        <Text style={styles.text} 
+              onPress={() => loginWithEmail(email, password)}
+              disabled={loading}>Login</Text>
       </TouchableOpacity>
     </Link>
   );
