@@ -1,34 +1,29 @@
 import React, {useState} from 'react';
 import {
-  Image, 
+  Image,
   StyleSheet,
   View,
-  Text, 
-  Dimensions, 
+  Text,
+  Dimensions,
   TouchableOpacity,
-  TextInput
+  TextInput,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {Button, Input} from '@rneui/themed';
 import LoginButton from '@/components/auth/buttons/LoginButtonFromLogin';
 import {Link} from 'expo-router';
-import { Feather } from '@expo/vector-icons';
+import {Feather} from '@expo/vector-icons';
 import Divider from '../Divider';
+import AuthHeader from './AuthHeader';
 
 const {width, height} = Dimensions.get('window');
 
 const window_width = width;
 const window_height = height;
 
-const alpha = [0.04 * window_height, 0.1 * window_height, 0.5 * window_height, 1.0 * window_height];
-const beta = [0.0 * window_width, 0.2 * window_width, 0.8 * window_width, 1.0 * window_width];
-
-
 export default function Auth() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [selected, setSelected] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -36,36 +31,25 @@ export default function Auth() {
   };
 
   return (
-    <SafeAreaView style={[styles.view]}>
-      <View style={[styles.container]}>
-        <View style={[styles.container1]}>
-            <Link href={'/'} asChild>
-              <TouchableOpacity style={styles.backButtonContainer}>
-                <Text style={styles.backButton}>←</Text>
-              </TouchableOpacity>
-            </Link>
-            <Image
-              style={[]}
-              resizeMode="contain"
-              source={require('../../assets/images/User/User-Logoo.png')}
-            />
-        </View>
+    <SafeAreaView style={styles.view}>
+      <View style={styles.container}>
+        <AuthHeader />
 
-        <View style={[styles.container2]}> 
-          <Text style={[styles.textCreate]}>Login</Text>
+        <View style={styles.container2}>
+          <Text style={styles.textCreate}>Login</Text>
           <View>
             <TextInput
-              style={[styles.textInput]}
-              onChangeText={(text: any) => setEmail(text)}
+              style={styles.textInput}
+              onChangeText={(text: string) => setEmail(text)}
               value={email}
               placeholder="Email"
             />
           </View>
           <View>
             <TextInput
-              style={[styles.textInput]}
+              style={styles.textInput}
               secureTextEntry={!showPassword}
-              onChangeText={(text: any) => setPassword(text)}
+              onChangeText={(text: string) => setPassword(text)}
               value={password}
               placeholder="Password"
             />
@@ -78,44 +62,46 @@ export default function Auth() {
               }}
               onPress={togglePasswordVisibility}
             >
-              <Feather name={showPassword ? 'eye' : 'eye-off'} size={24} color="black" />
+              <Feather
+                name={showPassword ? 'eye' : 'eye-off'}
+                size={24}
+                color="black"
+              />
             </TouchableOpacity>
           </View>
-          <View style={[styles.buttonContainer1]}>
-            <LoginButton email={email} password={password} loading={loading}/>
+          <View style={styles.buttonContainer1}>
+            <LoginButton email={email} password={password} loading={loading} />
           </View>
-          <Text style={[styles.textMiddle]}>Forgot Password?</Text>
+          <Text style={styles.textMiddle}>Forgot Password?</Text>
         </View>
-        
-        <View style={[styles.container3]}>
-          <View style={[styles.buttonContainer2]}>
-            <Divider inset={true} width={100} color="black"/>
-              <Text style={[styles.textSmall]}>or sign in with</Text>
+
+        <View style={styles.container3}>
+          <View style={styles.buttonContainer2}>
+            <Divider inset={true} width={100} color="black" />
+            <Text style={styles.textSmall}>or sign in with</Text>
             <Divider inset={true} width={100} color="black" />
           </View>
-          <View style={[styles.buttonContainer3]}>
+          <View style={styles.buttonContainer3}>
             <Image
               style={[styles.logo, styles.logoG]}
               resizeMode="contain"
               source={require('../../assets/images/User/User-Logog.png')}
             />
             <Image
-              style={[styles.logo]}
+              style={styles.logo}
               resizeMode="contain"
               source={require('../../assets/images/User/User-Logof.jpg')}
             />
             <Image
-              style={[styles.logo]}
+              style={styles.logo}
               resizeMode="contain"
               source={require('../../assets/images/User/User-Logoa.jpg')}
             />
           </View>
-          <Text style={[styles.textSmall]}>
+          <Text style={[styles.textSmall, styles.greyText]}>
             Don’t have an account?{' '}
-            <Link href={'/signup'} asChild>
-              <TouchableOpacity>
-                <Text style={[styles.textSmall, styles.linkText]}>Sign Up</Text>
-              </TouchableOpacity>
+            <Link href="/signup">
+              <Text style={styles.linkText}>Sign Up</Text>
             </Link>
           </Text>
           <View style={styles.footer}>
@@ -148,15 +134,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   textInput: {
-    height: 48, 
-    borderColor: 'black', 
+    height: 48,
+    borderColor: 'black',
     borderWidth: 1,
     borderRadius: 8,
-    alignSelf: 'center',
     width: '100%',
     marginTop: 8,
     marginBottom: 8,
     paddingLeft: 10,
+    paddingTop: 3,
+    fontFamily: 'Poppins',
   },
   textCreate: {
     fontSize: 28,
@@ -168,10 +155,13 @@ const styles = StyleSheet.create({
   },
   linkText: {
     color: '#1177C7',
-    textDecorationLine: 'underline',
   },
   textSmall: {
     fontSize: 12,
+    fontFamily: 'Poppins',
+  },
+  greyText: {
+    color: 'grey',
   },
   textMiddle: {
     fontSize: 14,
@@ -179,6 +169,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     color: '#696969',
     textDecorationLine: 'underline',
+    fontFamily: 'Poppins',
   },
   textBottom: {
     marginTop: 120,
@@ -203,7 +194,7 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   buttonContainer1: {
-    marginTop: 10,
+    marginTop: 15,
     flexDirection: 'column',
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -211,7 +202,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   buttonContainer2: {
-    marginTop: 40,
+    marginTop: 35,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -220,7 +211,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer3: {
     marginTop: 20,
-    marginBottom: 50, 
+    marginBottom: 50,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -231,7 +222,7 @@ const styles = StyleSheet.create({
     height: 35,
     borderRadius: 30,
   },
-  logoG: { 
+  logoG: {
     borderWidth: 1,
     borderColor: 'black',
   },

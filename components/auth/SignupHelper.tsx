@@ -1,18 +1,18 @@
 import React, {useState} from 'react';
 import {
-  Image, 
+  Image,
   StyleSheet,
   View,
-  Text, 
-  Dimensions, 
+  Text,
+  Dimensions,
   TouchableOpacity,
-  TextInput
+  TextInput,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Button, Input, CheckBox} from '@rneui/themed';
 import SignupButton from '@/components/auth/buttons/SignupButtonFromSignup';
 import {Link} from 'expo-router';
-import { Feather } from '@expo/vector-icons';
+import {Feather} from '@expo/vector-icons';
 import Divider from '../Divider';
 
 const {width, height} = Dimensions.get('window');
@@ -20,9 +20,18 @@ const {width, height} = Dimensions.get('window');
 const window_width = width;
 const window_height = height;
 
-const alpha = [0.04 * window_height, 0.1 * window_height, 0.5 * window_height, 1.0 * window_height];
-const beta = [0.0 * window_width, 0.2 * window_width, 0.8 * window_width, 1.0 * window_width];
-
+const alpha = [
+  0.04 * window_height,
+  0.1 * window_height,
+  0.5 * window_height,
+  1.0 * window_height,
+];
+const beta = [
+  0.0 * window_width,
+  0.2 * window_width,
+  0.8 * window_width,
+  1.0 * window_width,
+];
 
 export default function Auth() {
   const [email, setEmail] = useState('');
@@ -35,7 +44,7 @@ export default function Auth() {
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
-  
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -44,22 +53,22 @@ export default function Auth() {
     <SafeAreaView style={[styles.view]}>
       <View style={[styles.container]}>
         <View style={[styles.container1]}>
-            <Link href={'/'} asChild>
-              <TouchableOpacity style={styles.backButtonContainer}>
-                <Text style={styles.backButton}>←</Text>
-              </TouchableOpacity>
-            </Link>
-            <Image
-              style={[]}
-              resizeMode="contain"
-              source={require('../../assets/images/User/User-Logoo.png')}
-            />
+          <Link href={'/'} asChild>
+            <TouchableOpacity style={styles.backButtonContainer}>
+              <Text style={styles.backButton}>←</Text>
+            </TouchableOpacity>
+          </Link>
+          <Image
+            style={[]}
+            resizeMode="contain"
+            source={require('../../assets/images/User/User-Logoo.png')}
+          />
         </View>
 
-        <View style={[styles.container2]}> 
+        <View style={[styles.container2]}>
           <Text style={[styles.textCreate]}>Create an Account</Text>
           <View style={[]}>
-            <View >
+            <View>
               <TextInput
                 style={[styles.textInput]}
                 onChangeText={(text: any) => setEmail(text)}
@@ -67,7 +76,7 @@ export default function Auth() {
                 placeholder="Email"
               />
             </View>
-            <View >
+            <View>
               <TextInput
                 style={[styles.textInput]}
                 secureTextEntry={!showPassword}
@@ -84,11 +93,18 @@ export default function Auth() {
                 }}
                 onPress={togglePasswordVisibility}
               >
-                <Feather name={showPassword ? 'eye' : 'eye-off'} size={24} color="black" />
+                <Feather
+                  name={showPassword ? 'eye' : 'eye-off'}
+                  size={24}
+                  color="black"
+                />
               </TouchableOpacity>
             </View>
 
-            <Text style={[styles.textSmall, styles.textGrey]}>Password must be at least 8 characters and contain a letter and a number.</Text>
+            <Text style={[styles.textSmall, styles.textGrey]}>
+              Password must be at least 8 characters and contain a letter and a
+              number.
+            </Text>
             <View style={[styles.containercheckbox]}>
               <CheckBox
                 checked={isChecked}
@@ -97,7 +113,10 @@ export default function Auth() {
               />
               <View style={[styles.inlineText]}>
                 <Text style={[styles.textSmall]}>
-                  <Text style={[styles.textGrey]}>By clicking Sign Up, you acknowledge that you have read the {''}</Text>
+                  <Text style={[styles.textGrey]}>
+                    By clicking Sign Up, you acknowledge that you have read the{' '}
+                    {''}
+                  </Text>
                   <Text style={[styles.textBlue]}> Privacy Policy {''}</Text>
                   <Text style={[styles.textGrey]}> and agree to the {''}</Text>
                   <Text style={[styles.textBlue]}> Terms of Service</Text>
@@ -106,14 +125,14 @@ export default function Auth() {
             </View>
           </View>
         </View>
-        
+
         <View style={[styles.container3]}>
           <View style={[styles.buttonContainer1]}>
-            <SignupButton email={email} password={password} loading={loading}/>
+            <SignupButton email={email} password={password} loading={loading} />
           </View>
           <View style={[styles.buttonContainer2]}>
-            <Divider inset={true} width={100} color="black"/>
-              <Text style={[styles.textSmall]}>or sign up with</Text>
+            <Divider inset={true} width={100} color="black" />
+            <Text style={[styles.textSmall]}>or sign up with</Text>
             <Divider inset={true} width={100} color="black" />
           </View>
           <View style={[styles.buttonContainer3]}>
@@ -179,8 +198,8 @@ const styles = StyleSheet.create({
     marginRight: 0,
   },
   textInput: {
-    height: 48, 
-    borderColor: 'black', 
+    height: 48,
+    borderColor: 'black',
     borderWidth: 1,
     borderRadius: 8,
     alignSelf: 'center',
@@ -250,7 +269,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer3: {
     marginTop: 20,
-    marginBottom: 50, 
+    marginBottom: 50,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -262,7 +281,7 @@ const styles = StyleSheet.create({
     height: 35,
     borderRadius: 30,
   },
-  logoG: { 
+  logoG: {
     borderWidth: 1,
     borderColor: 'black',
   },

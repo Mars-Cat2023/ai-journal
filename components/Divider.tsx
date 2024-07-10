@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import {View, StyleSheet} from 'react-native';
 
 interface Divider {
   inset: boolean;
@@ -7,10 +7,14 @@ interface Divider {
   color: string;
 }
 
-const Divider : React.FC<Divider> = ({ inset, width, color }) => {
-  const insetStyle = inset ? { marginHorizontal: 5 } : {};
+const Divider: React.FC<Divider> = ({inset, width, color}) => {
+  const insetStyle = inset ? {marginHorizontal: 5} : {};
 
-  return <View style={[styles.divider, { width, backgroundColor: color }, insetStyle]} />;
+  return (
+    <View
+      style={[styles.divider, {width, backgroundColor: color}, insetStyle]}
+    />
+  );
 };
 
 const styles = StyleSheet.create({

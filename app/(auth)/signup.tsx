@@ -6,7 +6,6 @@ const {width, height} = Dimensions.get('window');
 const window_width = width;
 const window_height = height;
 
-
 function Signupp() {
   return (
     <View style={[styles.Screen]}>
@@ -15,11 +14,10 @@ function Signupp() {
   );
 }
 
-
 const styles = StyleSheet.create({
   Screen: {
     flex: 1,
-    backgroundColor: "#FF0000",
+    backgroundColor: '#FF0000',
   },
 });
 

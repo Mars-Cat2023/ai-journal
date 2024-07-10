@@ -6,7 +6,6 @@ const {width, height} = Dimensions.get('window');
 const window_width = width;
 const window_height = height;
 
-
 function Loginn() {
   return (
     <View style={[styles.Screen]}>
@@ -15,11 +14,10 @@ function Loginn() {
   );
 }
 
-
 const styles = StyleSheet.create({
   Screen: {
     flex: 1,
-    backgroundColor: "#FF0000",
+    backgroundColor: '#FF0000',
   },
 });
 

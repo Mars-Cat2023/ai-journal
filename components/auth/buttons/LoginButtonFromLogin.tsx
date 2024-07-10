@@ -9,13 +9,21 @@ interface LoginButtonProps {
   loading: boolean;
 }
 
-const LoginButton: React.FC<LoginButtonProps> = ({email, password, loading}) => {
+const LoginButton: React.FC<LoginButtonProps> = ({
+  email,
+  password,
+  loading,
+}) => {
   return (
     <Link href="/+not-found" asChild>
       <TouchableOpacity style={styles.button}>
-        <Text style={styles.text} 
-              onPress={() => loginWithEmail(email, password)}
-              disabled={loading}>Login</Text>
+        <Text
+          style={styles.text}
+          onPress={() => loginWithEmail(email, password)}
+          disabled={loading}
+        >
+          Login
+        </Text>
       </TouchableOpacity>
     </Link>
   );
@@ -33,6 +41,7 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     fontSize: 16,
+    fontFamily: 'Poppins',
   },
 });
 

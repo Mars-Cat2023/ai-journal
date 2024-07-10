@@ -9,13 +9,21 @@ interface SignupButtonProps {
   loading: boolean;
 }
 
-const SignupButton: React.FC<SignupButtonProps> = ({email, password, loading}) => {
+const SignupButton: React.FC<SignupButtonProps> = ({
+  email,
+  password,
+  loading,
+}) => {
   return (
     <Link href="/+not-found" asChild>
       <TouchableOpacity style={styles.button}>
-        <Text style={styles.text} 
-              onPress={() => signupWithEmail(email, password)}
-              disabled={loading}>Sign up</Text>
+        <Text
+          style={styles.text}
+          onPress={() => signupWithEmail(email, password)}
+          disabled={loading}
+        >
+          Sign up
+        </Text>
       </TouchableOpacity>
     </Link>
   );
@@ -33,6 +41,7 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     fontSize: 16,
+    fontFamily: 'Poppins',
   },
 });
 
