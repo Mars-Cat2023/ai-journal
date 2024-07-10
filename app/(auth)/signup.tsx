@@ -1,15 +1,10 @@
-import {StyleSheet, View, Dimensions} from 'react-native';
-import Signup from '@/components/auth/SignupHelper';
-
-const {width, height} = Dimensions.get('window');
-
-const window_width = width;
-const window_height = height;
+import {StyleSheet, View} from 'react-native';
+import SignupScreen from '@/components/auth/SignupScreen';
 
 function Signupp() {
   return (
     <View style={[styles.Screen]}>
-      <Signup />
+      <SignupScreen />
     </View>
   );
 }

@@ -16,7 +16,7 @@ const LoginButton: React.FC<LoginButtonProps> = ({
   return (
     <TouchableOpacity
       style={styles.button}
-      onPress={() => loginWithEmail(email, password)}
+      onPress={async () => loginWithEmail(email, password)}
       disabled={loading}
     >
       <Text style={styles.text}>Login</Text>

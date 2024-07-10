@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, TouchableOpacity, StyleSheet} from 'react-native';
-import {Link} from 'expo-router';
+import {router} from 'expo-router';
 import {signupWithEmail} from '@/lib/Auth';
 
 interface SignupButtonProps {
@@ -17,7 +17,12 @@ const SignupButton: React.FC<SignupButtonProps> = ({
   return (
     <TouchableOpacity
       style={styles.button}
-      onPress={() => signupWithEmail(email, password)}
+      onPress={async () => {
+        const isSuccess = await signupWithEmail(email, password);
+
+        // TODO: if success, route to email verification page
+        if (isSuccess) router.push('/');
+      }}
       disabled={loading}
     >
       <Text style={styles.text}>Sign Up</Text>

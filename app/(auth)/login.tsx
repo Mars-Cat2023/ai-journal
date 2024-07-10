@@ -1,15 +1,10 @@
-import {StyleSheet, View, Dimensions} from 'react-native';
-import Login from '@/components/auth/LoginHelper';
+import {StyleSheet, View} from 'react-native';
+import LoginScreen from '@/components/auth/LoginScreen';
 
-const {width, height} = Dimensions.get('window');
-
-const window_width = width;
-const window_height = height;
-
-function Loginn() {
+function Page() {
   return (
     <View style={[styles.Screen]}>
-      <Login />
+      <LoginScreen />
     </View>
   );
 }
@@ -21,4 +16,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Loginn;
+export default Page;

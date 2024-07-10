@@ -5,7 +5,7 @@ import {supabase} from './supabase';
  * Signs up the user with an email and password
  * @param {string} email - the email to sign up with
  * @param {string} password - the password to signup with
- *
+ * @param {bool} bool - true if successfully signs up user, false otherwise
  */
 export async function signupWithEmail(email: string, password: string) {
   const {
@@ -23,8 +23,10 @@ export async function signupWithEmail(email: string, password: string) {
   // TODO: If error then return error code
   if (error) {
     Alert.alert('Sign up error', error.message);
+    return false;
   } else {
     Alert.alert('Success signing up with email');
+    return true;
   }
 }
 
@@ -32,6 +34,7 @@ export async function signupWithEmail(email: string, password: string) {
  * Signs in the user with a valid email and password
  * @param {string} email - the email to sign in with
  * @param {string} password - the password to sign in with
+ * @return {bool} bool - returns false if the user isn't able to sign in, false otherwise
  */
 export async function loginWithEmail(email: string, password: string) {
   const {error} = await supabase.auth.signInWithPassword({
@@ -42,8 +45,10 @@ export async function loginWithEmail(email: string, password: string) {
   // TODO: if error then return error code
   if (error) {
     Alert.alert('Error signing in with user', error.message);
+    return false;
   } else {
     Alert.alert('Success signing in with user');
+    return true;
   }
 }
 

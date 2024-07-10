@@ -20,7 +20,7 @@ const {width, height} = Dimensions.get('window');
 const window_width = width;
 const window_height = height;
 
-export default function Auth() {
+export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);

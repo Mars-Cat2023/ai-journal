@@ -4,7 +4,7 @@ import {Link} from 'expo-router';
 
 const LoginButton = () => {
   return (
-    <Link href="/(auth)/login" asChild>
+    <Link href="/login" asChild>
       <TouchableOpacity style={styles.button}>
         <Text style={styles.text}>Login</Text>
       </TouchableOpacity>
