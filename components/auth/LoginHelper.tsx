@@ -32,9 +32,8 @@ export default function Auth() {
 
   return (
     <SafeAreaView style={styles.view}>
+      <AuthHeader link={'/'} />
       <View style={styles.container}>
-        <AuthHeader />
-
         <View style={styles.container2}>
           <Text style={styles.textCreate}>Login</Text>
           <View>

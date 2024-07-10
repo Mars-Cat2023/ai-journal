@@ -9,35 +9,22 @@ import {
   TextInput,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {Button, Input, CheckBox} from '@rneui/themed';
+import {CheckBox} from '@rneui/themed';
 import SignupButton from '@/components/auth/buttons/SignupButtonFromSignup';
 import {Link} from 'expo-router';
 import {Feather} from '@expo/vector-icons';
 import Divider from '../Divider';
+import AuthHeader from './AuthHeader';
 
 const {width, height} = Dimensions.get('window');
 
 const window_width = width;
 const window_height = height;
 
-const alpha = [
-  0.04 * window_height,
-  0.1 * window_height,
-  0.5 * window_height,
-  1.0 * window_height,
-];
-const beta = [
-  0.0 * window_width,
-  0.2 * window_width,
-  0.8 * window_width,
-  1.0 * window_width,
-];
-
 export default function Auth() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [selected, setSelected] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
@@ -51,36 +38,24 @@ export default function Auth() {
 
   return (
     <SafeAreaView style={[styles.view]}>
-      <View style={[styles.container]}>
-        <View style={[styles.container1]}>
-          <Link href={'/'} asChild>
-            <TouchableOpacity style={styles.backButtonContainer}>
-              <Text style={styles.backButton}>←</Text>
-            </TouchableOpacity>
-          </Link>
-          <Image
-            style={[]}
-            resizeMode="contain"
-            source={require('../../assets/images/User/User-Logoo.png')}
-          />
-        </View>
-
-        <View style={[styles.container2]}>
-          <Text style={[styles.textCreate]}>Create an Account</Text>
-          <View style={[]}>
+      <AuthHeader link="/" />
+      <View style={styles.container}>
+        <View style={styles.container2}>
+          <Text style={styles.textCreate}>Create an Account</Text>
+          <View>
             <View>
               <TextInput
-                style={[styles.textInput]}
-                onChangeText={(text: any) => setEmail(text)}
+                style={styles.textInput}
+                onChangeText={(text: string) => setEmail(text)}
                 value={email}
                 placeholder="Email"
               />
             </View>
             <View>
               <TextInput
-                style={[styles.textInput]}
+                style={styles.textInput}
                 secureTextEntry={!showPassword}
-                onChangeText={(text: any) => setPassword(text)}
+                onChangeText={(text: string) => setPassword(text)}
                 value={password}
                 placeholder="Password"
               />
@@ -105,23 +80,21 @@ export default function Auth() {
               Password must be at least 8 characters and contain a letter and a
               number.
             </Text>
-            <View style={[styles.containercheckbox]}>
+            <View style={styles.containercheckbox}>
               <CheckBox
                 checked={isChecked}
                 onPress={handleCheckboxChange}
                 style={styles.checkbox}
+                containerStyle={{marginRight: 0, paddingRight: 5}}
               />
-              <View style={[styles.inlineText]}>
-                <Text style={[styles.textSmall]}>
-                  <Text style={[styles.textGrey]}>
-                    By clicking Sign Up, you acknowledge that you have read the{' '}
-                    {''}
-                  </Text>
-                  <Text style={[styles.textBlue]}> Privacy Policy {''}</Text>
-                  <Text style={[styles.textGrey]}> and agree to the {''}</Text>
-                  <Text style={[styles.textBlue]}> Terms of Service</Text>
+              <Text style={[styles.textSmall, styles.inlineText]}>
+                <Text style={[styles.textGrey]}>
+                  By clicking Sign Up, you acknowledge that you have read the
                 </Text>
-              </View>
+                <Text style={[styles.textBlue]}> Privacy Policy</Text>
+                <Text style={[styles.textGrey]}> and agree to the</Text>
+                <Text style={[styles.textBlue]}> Terms of Service</Text>
+              </Text>
             </View>
           </View>
         </View>
@@ -152,12 +125,10 @@ export default function Auth() {
               source={require('../../assets/images/User/User-Logoa.jpg')}
             />
           </View>
-          <Text style={[styles.textSmall]}>
+          <Text style={[styles.textSmall, styles.textGrey]}>
             Already have an accounts?{' '}
             <Link href={'/login'} asChild>
-              <TouchableOpacity>
-                <Text style={[styles.textSmall, styles.linkText]}>Log in</Text>
-              </TouchableOpacity>
+              <Text style={styles.linkText}>Log in</Text>
             </Link>
           </Text>
           <View style={styles.footer}>
@@ -177,11 +148,9 @@ const styles = StyleSheet.create({
     minHeight: window_height,
   },
   container: {
-    justifyContent: 'space-around',
-    padding: 0,
     flexDirection: 'column',
-    backgroundColor: 'white',
     flex: 1,
+    marginTop: 15,
   },
   container1: {
     flex: 1,
@@ -189,13 +158,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
   },
-  containercheckbox: {
-    left: -30,
-    flexDirection: 'row',
-    width: '90%',
-  },
   checkbox: {
     marginRight: 0,
+  },
+  containercheckbox: {
+    left: -20,
+    flexDirection: 'row',
+    width: '88%',
   },
   textInput: {
     height: 48,
@@ -207,21 +176,22 @@ const styles = StyleSheet.create({
     marginTop: 8,
     marginBottom: 8,
     paddingLeft: 10,
+    paddingTop: 3,
+    fontFamily: 'Poppins',
   },
   textCreate: {
     fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'left',
     fontFamily: 'Poppins',
-    marginTop: 80,
     marginBottom: 10,
   },
   linkText: {
     color: '#1177C7',
-    textDecorationLine: 'underline',
   },
   textSmall: {
     fontSize: 12,
+    fontFamily: 'Poppins',
   },
   textGrey: {
     color: '#6C757D',
@@ -232,11 +202,7 @@ const styles = StyleSheet.create({
   inlineText: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginTop: 10,
-  },
-  textBottom: {
-    marginTop: 120,
-    fontSize: 12,
+    marginTop: 13,
   },
   container2: {
     flex: 6,
@@ -245,14 +211,13 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   container3: {
-    flex: 6,
+    flex: 6.8,
     flexDirection: 'column',
     alignItems: 'center',
     alignSelf: 'center',
     width: '80%',
   },
   buttonContainer1: {
-    marginTop: 10,
     flexDirection: 'column',
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -260,7 +225,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   buttonContainer2: {
-    marginTop: 50,
+    marginTop: 40,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -269,7 +234,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer3: {
     marginTop: 20,
-    marginBottom: 50,
+    marginBottom: 40,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -285,20 +250,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'black',
   },
-  backButtonContainer: {
-    position: 'absolute',
-    left: 15,
-  },
-  backButton: {
-    fontSize: 35,
-    fontWeight: 'bold',
-    marginRight: 10,
-    marginLeft: 0,
-    marginBottom: 12,
-  },
   footer: {
     position: 'absolute',
-    bottom: 20,
+    bottom: 5,
     left: 0,
     right: 0,
     padding: 20,
@@ -306,5 +260,7 @@ const styles = StyleSheet.create({
   footerText: {
     textAlign: 'center',
     color: '#1177C7',
+    fontFamily: 'Poppins',
+    fontSize: 14,
   },
 });

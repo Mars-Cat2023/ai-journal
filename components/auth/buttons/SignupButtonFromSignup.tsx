@@ -15,17 +15,13 @@ const SignupButton: React.FC<SignupButtonProps> = ({
   loading,
 }) => {
   return (
-    <Link href="/+not-found" asChild>
-      <TouchableOpacity style={styles.button}>
-        <Text
-          style={styles.text}
-          onPress={() => signupWithEmail(email, password)}
-          disabled={loading}
-        >
-          Sign up
-        </Text>
-      </TouchableOpacity>
-    </Link>
+    <TouchableOpacity
+      style={styles.button}
+      onPress={() => signupWithEmail(email, password)}
+      disabled={loading}
+    >
+      <Text style={styles.text}>Sign Up</Text>
+    </TouchableOpacity>
   );
 };
 

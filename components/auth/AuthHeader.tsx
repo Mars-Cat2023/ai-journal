@@ -1,10 +1,14 @@
 import {TouchableOpacity, View, Text, Image, StyleSheet} from 'react-native';
 import {Link} from 'expo-router';
 
-const AuthHeader = () => {
+type AuthHeaderProps = {
+  link: string;
+};
+
+const AuthHeader = ({link}: AuthHeaderProps) => {
   return (
     <View style={styles.header}>
-      <Link href={'/'} asChild>
+      <Link href={link} asChild>
         <TouchableOpacity style={styles.backButtonContainer}>
           <Text style={styles.backButton}>←</Text>
         </TouchableOpacity>

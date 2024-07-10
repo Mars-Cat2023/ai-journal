@@ -1,6 +1,5 @@
 import React from 'react';
 import {Text, TouchableOpacity, StyleSheet} from 'react-native';
-import {Link} from 'expo-router';
 import {loginWithEmail} from '@/lib/Auth';
 
 interface LoginButtonProps {
@@ -15,17 +14,13 @@ const LoginButton: React.FC<LoginButtonProps> = ({
   loading,
 }) => {
   return (
-    <Link href="/+not-found" asChild>
-      <TouchableOpacity style={styles.button}>
-        <Text
-          style={styles.text}
-          onPress={() => loginWithEmail(email, password)}
-          disabled={loading}
-        >
-          Login
-        </Text>
-      </TouchableOpacity>
-    </Link>
+    <TouchableOpacity
+      style={styles.button}
+      onPress={() => loginWithEmail(email, password)}
+      disabled={loading}
+    >
+      <Text style={styles.text}>Login</Text>
+    </TouchableOpacity>
   );
 };
 
