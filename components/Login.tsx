@@ -1,8 +1,18 @@
-import React, { useState } from 'react'
-import { Button, Input } from '@rneui/themed'
-import {Image, StyleSheet, View, Text, Dimensions} from 'react-native';
-import LoginButton from '@/components/auth/buttons/LoginButtonToLogin';
-
+import React, {useState} from 'react';
+import {
+  Image, 
+  StyleSheet,
+  View,
+  Text, 
+  Dimensions, 
+  TouchableOpacity,
+  TextInput
+} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {Button, Input} from '@rneui/themed';
+import LoginButton from '@/components/auth/buttons/LoginButtonFromLogin';
+import {Link} from 'expo-router';
+import { Feather } from '@expo/vector-icons';
 const {width, height} = Dimensions.get('window');
 
 const window_width = width;
@@ -16,6 +26,11 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [selected, setSelected] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <View style={styles.container}>
@@ -40,26 +55,40 @@ const Login = () => {
               autoCapitalize={'none'}
             />
           </View>
-          <View >
-            <Input
-              label="Password"
-              leftIcon={{ type: 'font-awesome', name: 'lock' }}
+          <View>
+            <TextInput
+              style={[styles.textInput]}
+              secureTextEntry={!showPassword}
               onChangeText={(text: any) => setPassword(text)}
               value={password}
-              secureTextEntry={true}
               placeholder="Password"
-              autoCapitalize={'none'}
             />
+            <TouchableOpacity
+              style={{
+                position: 'absolute',
+                top: 15,
+                right: 10,
+                padding: 5,
+              }}
+              onPress={togglePasswordVisibility}
+            >
+              <Feather name={showPassword ? 'eye' : 'eye-off'} size={24} color="black" />
+            </TouchableOpacity>
           </View>
-          <Text style={[styles.text22]}>Password must be at least 8 characters and contain a letter and a number.</Text>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Text>By clicking Sign Up, you acknowledge that you have read the Privacy Policy and agree to the Terms of Service</Text>
-          </View>
+          <Text style={[styles.textSmall]}>
+            Don’t have an account?{' '}
+            <Link href={'/signup'} asChild>
+              <TouchableOpacity>
+                <Text style={[styles.textSmall, styles.textInput]}>Sign Up</Text>
+              </TouchableOpacity>
+            </Link>
+          </Text>
+          <Text style={[styles.textBottom2]}>Terms of Use | Privacy Policy</Text>
         </View>
       </View>
       
       <View style={styles.container3}>
-        <LoginButton />
+        <LoginButton email={email} password={password} loading={loading}/>
       </View>
     </View>
   );
@@ -115,8 +144,34 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: 'Poppins',
     marginTop: 0,
-  }
-  
+  },
+  textInput: {
+    height: 20, 
+    borderColor: 'black', 
+    borderWidth: 10,
+    borderRadius: 20,
+    alignSelf: 'center',
+    width: '100%',
+    marginTop: 8,
+    marginBottom: 8,
+    paddingLeft: 20,
+  },
+  textSmall: {
+    fontSize: 12,
+  },
+  textMiddle: {
+    fontSize: 12,
+    textAlign: 'center',
+    marginTop: 20,
+  },
+  textBottom: {
+    marginTop: 120,
+    fontSize: 12,
+  },
+  textBottom2: {
+    marginTop: 180,
+    fontSize: 12,
+  },
 });
 
 export default Login;
