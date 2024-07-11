@@ -39,7 +39,7 @@ const Signup = () => {
         <Image
           style={[]}
           resizeMode="contain"
-          source={require('../assets/images/User/User-Logoo.png')}
+          source={require('../assets/images/User/onevoice-header-logo.png')}
         />
       </View>
 

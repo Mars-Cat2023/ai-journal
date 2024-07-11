@@ -113,19 +113,19 @@ export default function LoginScreen() {
               <Image
                 style={[styles.logo, styles.logoG]}
                 resizeMode="contain"
-                source={require('../../assets/images/User/User-Logog.png')}
+                source={require('../../assets/images/User/auth-google-logo.png')}
               />
             </View>
             <Image
               style={[styles.logo]}
               resizeMode="contain"
-              source={require('../../assets/images/User/User-Logof.jpg')}
+              source={require('../../assets/images/User/auth-facebook-logo.jpg')}
             />
             <View style={styles.logoAppleContainer}>
               <Image
                 style={[styles.logo, styles.logoApple]}
                 resizeMode="contain"
-                source={require('../../assets/images/User/User-Logoa.png')}
+                source={require('../../assets/images/User/auth-apple-logo.png')}
               />
             </View>
           </View>
