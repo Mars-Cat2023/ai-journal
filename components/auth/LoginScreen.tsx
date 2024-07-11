@@ -81,21 +81,25 @@ export default function LoginScreen() {
             <Divider inset={true} width={100} color="black" />
           </View>
           <View style={styles.buttonContainer3}>
-            <Image
-              style={[styles.logo, styles.logoG]}
-              resizeMode="contain"
-              source={require('../../assets/images/User/User-Logog.png')}
-            />
+            <View style={styles.logoGContainer}>
+              <Image
+                style={[styles.logo, styles.logoG]}
+                resizeMode="contain"
+                source={require('../../assets/images/User/User-Logog.png')}
+              />
+            </View>
             <Image
               style={styles.logo}
               resizeMode="contain"
               source={require('../../assets/images/User/User-Logof.jpg')}
             />
-            <Image
-              style={styles.logo}
-              resizeMode="contain"
-              source={require('../../assets/images/User/User-Logoa.jpg')}
-            />
+            <View style={styles.logoAppleContainer}>
+              <Image
+                style={[styles.logo, styles.logoApple]}
+                resizeMode="contain"
+                source={require('../../assets/images/User/User-Logoa.png')}
+              />
+            </View>
           </View>
           <Text style={[styles.textSmall, styles.greyText]}>
             Don’t have an account?{' '}
@@ -220,10 +224,38 @@ const styles = StyleSheet.create({
     width: 35,
     height: 35,
     borderRadius: 30,
+    padding: 10,
+  },
+  logoGContainer: {
+    width: 35,
+    height: 35,
+    borderWidth: 1,
+    borderColor: 'grey',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 50,
   },
   logoG: {
+    width: 25,
+    height: 25,
+  },
+  logoAppleContainer: {
+    position: 'relative',
+    width: 35,
+    height: 35,
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: 'grey',
+    zIndex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 50,
+    backgroundColor: 'black',
+  },
+  logoApple: {
+    position: 'relative',
+    width: 18,
+    height: 18,
+    zIndex: 2,
   },
   backButtonContainer: {
     position: 'absolute',
