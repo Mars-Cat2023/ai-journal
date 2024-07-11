@@ -126,7 +126,7 @@ export default function LoginScreen() {
             />
           </View>
           <Text style={[styles.textSmall, styles.textGrey]}>
-            Already have an accounts?{' '}
+            Already have an account?{' '}
             <Link href={'/login'} asChild>
               <Text style={styles.linkText}>Log in</Text>
             </Link>
