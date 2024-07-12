@@ -39,7 +39,7 @@ export default function LoginScreen() {
 
   return (
     <SafeAreaView style={styles.view}>
-      <AuthHeader link={'/'} />
+      <AuthHeader />
       <View style={styles.container}>
         <View style={styles.container2}>
           <Text style={styles.textCreate}>Login</Text>
