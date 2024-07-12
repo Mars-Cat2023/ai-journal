@@ -9,7 +9,7 @@ import {supabase} from './supabase';
  */
 export async function signupWithEmail(email: string, password: string) {
   const {
-    data: {session},
+    data: {session, user},
     error,
   } = await supabase.auth.signUp({
     email: email,
@@ -23,9 +23,23 @@ export async function signupWithEmail(email: string, password: string) {
   // TODO: If error then return error code
   if (error) {
     Alert.alert('Sign up error', error.message);
+    console.log('error', session, user);
     return false;
+  } else if (session === null) {
+    // if user identities array is 0, then email already exists
+    if (user?.identities?.length === 0) {
+      Alert.alert('Sign up error', 'This email is already in use.');
+      return false;
+    } else {
+      // if not, then it is a new account
+      Alert.alert(
+        'Success',
+        'Please check your email to confirm your account.'
+      );
+      return true;
+    }
   } else {
-    Alert.alert('Success signing up with email');
+    Alert.alert('Success', 'You have been signed up and logged in.');
     return true;
   }
 }

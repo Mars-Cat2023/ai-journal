@@ -14,6 +14,7 @@ import {Link} from 'expo-router';
 import {Feather} from '@expo/vector-icons';
 import Divider from '../Divider';
 import AuthHeader from './AuthHeader';
+import {loginWithEmail} from '@/lib/Auth';
 
 const {width, height} = Dimensions.get('window');
 
@@ -23,8 +24,14 @@ const window_height = height;
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  /**
+   * Handles logic after user clicks on login
+   */
+  const handleLogin = () => {
+    loginWithEmail(email, password);
+  };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -69,7 +76,7 @@ export default function LoginScreen() {
             </TouchableOpacity>
           </View>
           <View style={styles.buttonContainer1}>
-            <LoginButton email={email} password={password} loading={loading} />
+            <LoginButton onPress={handleLogin} />
           </View>
           <Text style={styles.textMiddle}>Forgot Password?</Text>
         </View>

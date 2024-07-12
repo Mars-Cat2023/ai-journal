@@ -1,24 +1,13 @@
 import React from 'react';
 import {Text, TouchableOpacity, StyleSheet} from 'react-native';
-import {loginWithEmail} from '@/lib/Auth';
 
 interface LoginButtonProps {
-  email: string;
-  password: string;
-  loading: boolean;
+  onPress: () => void;
 }
 
-const LoginButton: React.FC<LoginButtonProps> = ({
-  email,
-  password,
-  loading,
-}) => {
+const LoginButton: React.FC<LoginButtonProps> = ({onPress}) => {
   return (
-    <TouchableOpacity
-      style={styles.button}
-      onPress={async () => loginWithEmail(email, password)}
-      disabled={loading}
-    >
+    <TouchableOpacity style={styles.button} onPress={onPress}>
       <Text style={styles.text}>Login</Text>
     </TouchableOpacity>
   );

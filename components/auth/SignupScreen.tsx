@@ -11,10 +11,11 @@ import {
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {CheckBox} from '@rneui/themed';
 import SignupButton from '@/components/auth/buttons/SignupButtonFromSignup';
-import {Link} from 'expo-router';
+import {Link, router} from 'expo-router';
 import {Feather} from '@expo/vector-icons';
 import Divider from '../Divider';
 import AuthHeader from './AuthHeader';
+import {signupWithEmail} from '@/lib/Auth';
 
 const {width, height} = Dimensions.get('window');
 
@@ -24,9 +25,18 @@ const window_height = height;
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+
+  /**
+   * Handles the logic after a user clicks the signup button
+   */
+  const handleSignup = async () => {
+    const isSuccess = await signupWithEmail(email, password);
+
+    // TODO: if success, route to email verification page
+    if (isSuccess) router.push('/');
+  };
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
@@ -101,7 +111,7 @@ export default function LoginScreen() {
 
         <View style={[styles.container3]}>
           <View style={[styles.buttonContainer1]}>
-            <SignupButton email={email} password={password} loading={loading} />
+            <SignupButton onPress={handleSignup} />
           </View>
           <View style={[styles.buttonContainer2]}>
             <Divider inset={true} width={100} color="black" />
