@@ -1,4 +1,6 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {StatusBar} from 'react-native';
 import {DarkTheme, DefaultTheme, ThemeProvider} from '@react-navigation/native';
 import {useFonts} from 'expo-font';
 import {Stack, useRouter} from 'expo-router';
@@ -47,7 +49,6 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
   const router = useRouter();
 
   useEffect(() => {
@@ -76,14 +77,21 @@ function RootLayoutNav() {
   }, [router]);
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AuthProvider>
-        <Stack>
-          <Stack.Screen name="index" options={{headerShown: false}} />
-          <Stack.Screen name="(auth)" options={{headerShown: false}} />
-          <Stack.Screen name="(user)" options={{headerShown: false}} />
-        </Stack>
-      </AuthProvider>
+    <ThemeProvider value={DefaultTheme}>
+      <StatusBar
+        backgroundColor="transparent"
+        translucent={true}
+        barStyle="dark-content"
+      />
+      <SafeAreaProvider>
+        <AuthProvider>
+          <Stack>
+            <Stack.Screen name="index" options={{headerShown: false}} />
+            <Stack.Screen name="(auth)" options={{headerShown: false}} />
+            <Stack.Screen name="(user)" options={{headerShown: false}} />
+          </Stack>
+        </AuthProvider>
+      </SafeAreaProvider>
     </ThemeProvider>
   );
 }
