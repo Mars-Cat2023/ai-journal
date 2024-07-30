@@ -6,10 +6,6 @@ import LoginButton from '@/components/auth/buttons/LoginButtonToLogin';
 const {width, height} = Dimensions.get('window');
 
 const data = [
-  // { id: '1', text: 'Welcome to OneVoice' , source: '../assets/images/home-screen/gradient-red.png', p: styles.red},
-  // { id: '2', text: 'Capture Your Reflections' , source: '../assets/images/home-screen/gradient-red.png', p: styles.red},
-  // { id: '3', text: 'AI-Powered Insights and Summaries' , source: '../assets/images/home-screen/gradient-green.png', p: styles.red},
-  // { id: '4', text: 'Share and Connect', source: '../assets/images/home-screen/gradient-blue.png', },
   { id: '1', text: 'Welcome to OneVoice', gradient: 'orange'},
   { id: '2', text: 'Capture Your Reflections', gradient: 'red'},
   { id: '3', text: 'AI-Powered Insights and Summaries', gradient: 'green'},
