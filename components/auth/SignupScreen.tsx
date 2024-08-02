@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Image,
   StyleSheet,
@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   TextInput,
   KeyboardAvoidingView,
-  Platform,
   Keyboard,
   TouchableWithoutFeedback,
 } from 'react-native';
@@ -21,20 +20,47 @@ import AuthHeader from './AuthHeader';
 import AuthFooter from './AuthFooter';
 import {signupWithEmail} from '@/lib/Auth';
 
-export default function LoginScreen() {
+export default function SignupScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
-  /**
-   * Handles the logic after a user clicks the signup button
-   */
+  const validateEmail = (email: string) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
+  };
+
+  const validatePassword = (password: string) => {
+    const re = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    return re.test(password);
+  };
+
   const handleSignup = async () => {
-    const isSuccess = await signupWithEmail(email, password);
+    if (!validateEmail(email)) {
+      setEmailError('This is an invalid email, please try again.');
+      return;
+    } else {
+      setEmailError('');
+    }
 
-    // if success, route to email verification page
-    if (isSuccess) router.push('/email-verification');
+    if (!validatePassword(password)) {
+      setPasswordError(
+        'Password must be at least 8 characters and contain a letter and a number.'
+      );
+      return;
+    } else {
+      setPasswordError('');
+    }
+
+    const result = await signupWithEmail(email, password);
+    if (!result.success) {
+      setEmailError(result.message);
+    } else {
+      router.push('/email-verification');
+    }
   };
 
   const handleCheckboxChange = () => {
@@ -45,12 +71,24 @@ export default function LoginScreen() {
     setShowPassword(!showPassword);
   };
 
+  useEffect(() => {
+    setEmailError(
+      !validateEmail(email) && email
+        ? 'This is an invalid email, please try again.'
+        : ''
+    );
+    setPasswordError(
+      !validatePassword(password) && password
+        ? 'Password must be at least 8 characters and contain a letter and a number.'
+        : ''
+    );
+  }, [email, password]);
+
+  const isSignupDisabled =
+    !email || !password || !isChecked || !!emailError || !!passwordError;
+
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={{flex: 1}}
-      enabled
-    >
+    <KeyboardAvoidingView style={{flex: 1}} enabled>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <SafeAreaView style={styles.view}>
           <AuthHeader />
@@ -58,31 +96,62 @@ export default function LoginScreen() {
             <View style={styles.signupFieldsContainer}>
               <Text style={styles.textCreate}>Create an Account</Text>
               <View>
+                <TextInput
+                  style={[
+                    styles.textInput,
+                    emailError ? styles.errorInput : null,
+                  ]}
+                  onChangeText={(text: string) => {
+                    setEmail(text);
+                    setEmailError(
+                      !validateEmail(text)
+                        ? 'This is an invalid email, please try again.'
+                        : ''
+                    );
+                  }}
+                  value={email}
+                  placeholder="Email"
+                  placeholderTextColor="rgba(50, 54, 62, 1)"
+                  onBlur={() => {
+                    if (!validateEmail(email)) {
+                      setEmailError(
+                        'This is an invalid email, please try again.'
+                      );
+                    } else {
+                      setEmailError('');
+                    }
+                  }}
+                />
                 <View>
                   <TextInput
-                    style={styles.textInput}
-                    onChangeText={(text: string) => setEmail(text)}
-                    value={email}
-                    placeholder="Email"
-                    placeholderTextColor="rgba(50, 54, 62, 1)"
-                  />
-                </View>
-                <View>
-                  <TextInput
-                    style={styles.textInput}
+                    style={[
+                      styles.textInput,
+                      passwordError ? styles.errorInput : null,
+                    ]}
                     secureTextEntry={!showPassword}
-                    onChangeText={(text: string) => setPassword(text)}
+                    onChangeText={(text: string) => {
+                      setPassword(text);
+                      setPasswordError(
+                        !validatePassword(text)
+                          ? 'Password must be at least 8 characters and contain a letter and a number.'
+                          : ''
+                      );
+                    }}
                     value={password}
                     placeholder="Password"
                     placeholderTextColor="rgba(50, 54, 62, 1)"
+                    onBlur={() => {
+                      if (!validatePassword(password)) {
+                        setPasswordError(
+                          'Password must be at least 8 characters and contain a letter and a number.'
+                        );
+                      } else {
+                        setPasswordError('');
+                      }
+                    }}
                   />
                   <TouchableOpacity
-                    style={{
-                      position: 'absolute',
-                      top: 15,
-                      right: 10,
-                      padding: 5,
-                    }}
+                    style={styles.eyeIcon}
                     onPress={togglePasswordVisibility}
                   >
                     <Feather
@@ -92,11 +161,19 @@ export default function LoginScreen() {
                     />
                   </TouchableOpacity>
                 </View>
-
-                <Text style={[styles.textSmall, styles.textGrey]}>
-                  Password must be at least 8 characters and contain a letter
-                  and a number.
-                </Text>
+                {(emailError && email) || (passwordError && password) ? (
+                  <View style={styles.errorContainer}>
+                    <Feather name="alert-circle" size={16} color="red" />
+                    <Text style={styles.errorText}>
+                      {emailError || passwordError}
+                    </Text>
+                  </View>
+                ) : (
+                  <Text style={[styles.textSmall, styles.textGrey]}>
+                    Password must be at least 8 characters and contain a letter
+                    and a number.
+                  </Text>
+                )}
                 <View style={styles.containercheckbox}>
                   <CheckBox
                     checked={isChecked}
@@ -107,20 +184,21 @@ export default function LoginScreen() {
                   <Text style={[styles.textSmall, styles.inlineText]}>
                     <Text style={[styles.textGrey]}>
                       By clicking Sign Up, you acknowledge that you have read
-                      the
+                      the{' '}
                     </Text>
-                    <Text style={[styles.textBlue]}> Privacy Policy</Text>
-                    <Text style={[styles.textGrey]}> and agree to the</Text>
-                    <Text style={[styles.textBlue]}> Terms of Service</Text>
+                    <Text style={[styles.textBlue]}>Privacy Policy</Text>
+                    <Text style={[styles.textGrey]}> and agree to the </Text>
+                    <Text style={[styles.textBlue]}>Terms of Service</Text>
                   </Text>
                 </View>
               </View>
             </View>
 
-            <View style={[styles.signupButtonsContainer]}>
+            <View style={styles.signupButtonsContainer}>
               <SignupButton
                 onPress={handleSignup}
                 style={styles.signupButton}
+                disabled={isSignupDisabled}
               />
 
               <View style={styles.dividerContainer}>
@@ -129,7 +207,7 @@ export default function LoginScreen() {
                 <Divider inset flex={1} />
               </View>
 
-              <View style={[styles.otherSignupButtonsContainer]}>
+              <View style={styles.otherSignupButtonsContainer}>
                 <View style={styles.logoGContainer}>
                   <Image
                     style={[styles.logo, styles.logoG]}
@@ -150,7 +228,6 @@ export default function LoginScreen() {
                   />
                 </View>
               </View>
-
               <Text style={[styles.textSmall, styles.textGrey]}>
                 Already have an account?{' '}
                 <Link href={'/login'} asChild>
@@ -158,8 +235,8 @@ export default function LoginScreen() {
                 </Link>
               </Text>
             </View>
-            <AuthFooter />
           </View>
+          <AuthFooter />
         </SafeAreaView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
@@ -172,6 +249,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  eyeIcon: {
+    position: 'absolute',
+    top: 15,
+    right: 10,
+    padding: 5,
   },
   container: {
     flex: 1,
@@ -194,9 +277,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    width: '100%',
-  },
-  divider: {
     width: '100%',
   },
   otherSignupButtonsContainer: {
@@ -236,6 +316,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   linkText: {
+    zIndex: 2,
     color: '#1177C7',
   },
   textSmall: {
@@ -252,6 +333,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginTop: 13,
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 12,
+    marginLeft: 5,
+  },
+  errorContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 5,
+  },
+  errorInput: {
+    borderColor: 'red',
   },
   logo: {
     width: 35,
@@ -272,21 +366,17 @@ const styles = StyleSheet.create({
     height: 25,
   },
   logoAppleContainer: {
-    position: 'relative',
     width: 35,
     height: 35,
     borderWidth: 1,
     borderColor: 'grey',
-    zIndex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 50,
     backgroundColor: 'black',
   },
   logoApple: {
-    position: 'relative',
     width: 18,
     height: 18,
-    zIndex: 2,
   },
 });

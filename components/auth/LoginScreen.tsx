@@ -30,21 +30,46 @@ export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
-  /**
-   * Handles logic after user clicks on login
-   */
-  const handleLogin = () => {
-    loginWithEmail(email, password);
+  // Email validation function
+  const validateEmail = (email: string) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
+  };
+
+  const handleLogin = async () => {
+    // Validate email and set error message if invalid
+    if (!validateEmail(email)) {
+      setEmailError('This is an invalid email, please try again.');
+      return;
+    } else {
+      setEmailError('');
+    }
+
+    const result = await loginWithEmail(email, password);
+    if (!result.success) {
+      setErrorMessage(result.message); // Set the specific error message here
+    } else {
+      setErrorMessage('');
+      // Redirect to another screen or perform other actions upon successful login
+    }
   };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
+  // Determine if login button should be disabled
+  const isLoginDisabled =
+    !email || !password || !!emailError || !!passwordError;
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={{flex: 1}}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <SafeAreaView style={styles.view}>
@@ -54,29 +79,44 @@ export default function LoginScreen() {
               <Text style={styles.textCreate}>Login</Text>
               <View>
                 <TextInput
-                  style={styles.textInput}
-                  onChangeText={(text: string) => setEmail(text)}
+                  style={[
+                    styles.textInput,
+                    emailError || errorMessage ? styles.errorInput : null,
+                  ]}
+                  onChangeText={(text: string) => {
+                    setEmail(text);
+                    setEmailError('');
+                    setErrorMessage('');
+                  }}
                   value={email}
                   placeholder="Email"
                   placeholderTextColor="rgba(50, 54, 62, 1)"
                 />
+                {emailError && email ? (
+                  <View style={styles.errorContainer}>
+                    <Feather name="alert-circle" size={16} color="red" />
+                    <Text style={styles.errorText}>{emailError}</Text>
+                  </View>
+                ) : null}
               </View>
               <View>
                 <TextInput
-                  style={styles.textInput}
+                  style={[
+                    styles.textInput,
+                    passwordError || errorMessage ? styles.errorInput : null,
+                  ]}
                   secureTextEntry={!showPassword}
-                  onChangeText={(text: string) => setPassword(text)}
+                  onChangeText={(text: string) => {
+                    setPassword(text);
+                    setPasswordError('');
+                    setErrorMessage('');
+                  }}
                   value={password}
                   placeholder="Password"
                   placeholderTextColor="rgba(50, 54, 62, 1)"
                 />
                 <TouchableOpacity
-                  style={{
-                    position: 'absolute',
-                    top: 15,
-                    right: 10,
-                    padding: 5,
-                  }}
+                  style={styles.eyeIcon}
                   onPress={togglePasswordVisibility}
                 >
                   <Feather
@@ -85,13 +125,24 @@ export default function LoginScreen() {
                     color="black"
                   />
                 </TouchableOpacity>
+                {passwordError ? (
+                  <View style={styles.errorContainer}>
+                    <Feather name="alert-circle" size={16} color="red" />
+                    <Text style={styles.errorText}>{passwordError}</Text>
+                  </View>
+                ) : null}
               </View>
+              {errorMessage ? (
+                <View style={styles.errorContainer}>
+                  <Feather name="alert-circle" size={16} color="red" />
+                  <Text style={styles.errorText}>{errorMessage}</Text>
+                </View>
+              ) : null}
               <View style={styles.buttonContainer1}>
-                <LoginButton onPress={handleLogin} />
+                <LoginButton onPress={handleLogin} disabled={isLoginDisabled} />
               </View>
               <Text style={styles.textMiddle}>Forgot Password?</Text>
             </View>
-
             <View style={styles.container3}>
               <View style={styles.buttonContainer2}>
                 <Divider inset flex={1} />
@@ -166,6 +217,9 @@ const styles = StyleSheet.create({
     paddingTop: 3,
     fontFamily: 'Poppins',
   },
+  errorInput: {
+    borderColor: 'red',
+  },
   textCreate: {
     fontSize: 28,
     fontWeight: 'bold',
@@ -192,13 +246,15 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     fontFamily: 'Poppins',
   },
-  textBottom: {
-    marginTop: 120,
-    fontSize: 12,
+  errorText: {
+    color: 'red',
+    fontSize: 14,
+    marginLeft: 5,
   },
-  textBottom2: {
-    marginTop: 180,
-    fontSize: 12,
+  errorContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 5,
   },
   container2: {
     flex: 6,
@@ -275,26 +331,10 @@ const styles = StyleSheet.create({
     height: 18,
     zIndex: 2,
   },
-  backButtonContainer: {
+  eyeIcon: {
     position: 'absolute',
-    left: 15,
-  },
-  backButton: {
-    fontSize: 35,
-    fontWeight: 'bold',
-    marginRight: 10,
-    marginLeft: 0,
-    marginBottom: 12,
-  },
-  footer: {
-    position: 'absolute',
-    bottom: 20,
-    left: 0,
-    right: 0,
-    padding: 20,
-  },
-  footerText: {
-    textAlign: 'center',
-    color: '#1177C7',
+    top: 15,
+    right: 10,
+    padding: 5,
   },
 });
