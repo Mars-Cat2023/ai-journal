@@ -11,15 +11,17 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Platform,
+  Alert,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import LoginButton from '@/components/auth/buttons/LoginButtonFromLogin';
-import {Link} from 'expo-router';
+import {Link, router} from 'expo-router';
 import {Feather} from '@expo/vector-icons';
 import Divider from '../Divider';
 import AuthHeader from './AuthHeader';
 import AuthFooter from './AuthFooter';
 import {loginWithEmail} from '@/lib/Auth';
+import {supabase} from '@/lib/supabase';
 
 const {width, height} = Dimensions.get('window');
 
@@ -50,11 +52,35 @@ export default function LoginScreen() {
     }
 
     const result = await loginWithEmail(email, password);
+
+    // if the login failed, set error message
     if (!result.success) {
-      setErrorMessage(result.message); // Set the specific error message here
+      setErrorMessage(result.message);
     } else {
+      // if login successful
       setErrorMessage('');
-      // Redirect to another screen or perform other actions upon successful login
+      const userId = result.userId;
+      if (userId) {
+        try {
+          const {data, error} = await supabase
+            .from('users')
+            .select('is_onboarding')
+            .eq('id', userId)
+            .single();
+          if (error) {
+            console.error('Error fetching user data:', error);
+            return;
+          }
+          if (data?.is_onboarding) {
+            router.push('/');
+          } else {
+            router.push('/tell-us-about-yourself');
+          }
+        } catch (error: any) {
+          Alert.alert('Error', error.message);
+          console.log(error.message);
+        }
+      }
     }
   };
 
