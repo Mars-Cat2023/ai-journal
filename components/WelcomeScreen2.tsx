@@ -1,40 +1,43 @@
 import React, { useState, useRef } from 'react';
-import {Image, StyleSheet, View, Text, Dimensions, FlatList, ImageBackground} from 'react-native';
+import { Image, StyleSheet, View, Text, Dimensions, FlatList, ImageBackground } from 'react-native';
 import SignupButton from '@/components/auth/buttons/SignupButtonToSignup';
 import LoginButton from '@/components/auth/buttons/LoginButtonToLogin';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
-const data = [
-  { id: '1', text: 'Welcome to OneVoice', gradient: 'orange'},
-  { id: '2', text: 'Capture Your Reflections', gradient: 'red'},
-  { id: '3', text: 'AI-Powered Insights and Summaries', gradient: 'green'},
-  { id: '4', text: 'Share and Connect', gradient: 'blue'},
+interface DataItem {
+  id: string;
+  text: string;
+  gradient: string;
+}
+
+const data: DataItem[] = [
+  { id: '1', text: 'Welcome to OneVoice', gradient: 'orange' },
+  { id: '2', text: 'Capture Your Reflections', gradient: 'red' },
+  { id: '3', text: 'AI-Powered Insights and Summaries', gradient: 'green' },
+  { id: '4', text: 'Share and Connect', gradient: 'blue' },
 ];
 
-
-// In React Native, you can’t use require() for dynamically setting the source property of an image, as require() is a static import. 
-// Instead, you need to use import statements for static images or dynamically set the source using an object that maps keys to image sources.
-const gradientImages = {
+const gradientImages: { [key: string]: any } = {
   'orange': require('../assets/images/welcome-screen/gradient-orange.png'),
   'red': require('../assets/images/welcome-screen/gradient-red.png'),
   'green': require('../assets/images/welcome-screen/gradient-green.png'),
   'blue': require('../assets/images/welcome-screen/gradient-blue.png'),
 };
 
-const SwipeScroll = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const flatListRef = useRef(null);
+const SwipeScroll: React.FC = () => {
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const flatListRef = useRef<FlatList<DataItem>>(null);
 
-  const onViewRef = React.useRef(({ viewableItems }) => {
+  const onViewRef = useRef(({ viewableItems }: { viewableItems: any[] }) => {
     if (viewableItems.length > 0) {
       setActiveIndex(viewableItems[0].index);
     }
   });
 
-  const viewConfigRef = React.useRef({ viewAreaCoveragePercentThreshold: 50 });
+  const viewConfigRef = useRef({ viewAreaCoveragePercentThreshold: 50 });
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }: { item: DataItem }) => (
     activeIndex !== 0 ? (
       <View style={styles.itemContainer}>
         <Text style={styles.itemText1}>{item.text}</Text>
@@ -51,7 +54,8 @@ const SwipeScroll = () => {
           <Text style={styles.thinText0}>voice</Text>
         </Text>
       </View>
-    ) );
+    )
+  );
 
   const currentGradient = data[activeIndex]?.gradient || 'red';
   const backgroundImage = gradientImages[currentGradient];
@@ -70,7 +74,7 @@ const SwipeScroll = () => {
             resizeMode="contain"
           />
         )}
-        
+
         <FlatList
           ref={flatListRef}
           data={data}
@@ -97,11 +101,7 @@ const SwipeScroll = () => {
           <LoginButton />
           <SignupButton />
         </View>
-
-
       </ImageBackground>
-
-
     </View>
   );
 };
