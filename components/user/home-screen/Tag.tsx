@@ -1,13 +1,13 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import {MonoText} from '@/components/StyledText';
+import {Text} from '@/components/StyledText';
 
 type TagProps = {name: string};
 
 export default function Tag({name}: TagProps) {
   return (
     <View style={styles.container}>
-      <MonoText style={styles.tagName}>{name}</MonoText>
+      <Text style={styles.tagName}>{name}</Text>
     </View>
   );
 }

@@ -1,6 +1,6 @@
 import {Image, StyleSheet, View, TouchableOpacity} from 'react-native';
 import {Card} from '@rneui/themed';
-import {MonoText, TextSemiBold} from '@/components/StyledText';
+import {Text, TextSemiBold} from '@/components/StyledText';
 import Tag from './Tag';
 import {IJournalEntry} from '@/models/data/IJournalEntry';
 import {dateToStringConverter} from '@/lib/util';
@@ -21,7 +21,7 @@ export default function Post({
   return (
     <Card containerStyle={styles.card}>
       <View style={styles.cardTop}>
-        <MonoText style={styles.date}>{dateToStringConverter(date)}</MonoText>
+        <Text style={styles.date}>{dateToStringConverter(date)}</Text>
         <View>
           <TouchableOpacity onPress={onOpen}>
             <Image
@@ -39,9 +39,9 @@ export default function Post({
           source={require('../../../assets/images/mockup-post-img.jpeg')}
         />
         */}
-        <MonoText style={styles.content}>
+        <Text style={styles.content}>
           {content.substring(0, CONTENT_LENGTH)}
-        </MonoText>
+        </Text>
       </View>
       <View style={styles.tagsContainer}>
         {tags.map((tag, i) => (

@@ -18,7 +18,7 @@ import {database} from '@/lib/watermelon/database';
 import {Post as PostFunctions} from '@/lib/watermelon/post';
 import {router} from 'expo-router';
 import {Popup, SCROLL_DESTINATION, CLOSED_POSITION, PopupRef} from './Popup';
-import {MonoText} from '@/components/StyledText';
+import {Text} from '@/components/StyledText';
 
 export default function HomeScreen() {
   const {isConnected} = useNet();
@@ -137,19 +137,19 @@ export default function HomeScreen() {
               <Image
                 source={require('../../../assets/images/home-screen/Pencil.png')}
               />
-              <MonoText>Edit</MonoText>
+              <Text>Edit</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.button, styles.button_border]}>
               <Image
                 source={require('../../../assets/images/home-screen/Bookmark.png')}
               />
-              <MonoText>Mark As Favourite</MonoText>
+              <Text>Mark As Favourite</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.button, styles.button_border]}>
               <Image
                 source={require('../../../assets/images/home-screen/Price Tag.png')}
               />
-              <MonoText>Edit Tag</MonoText>
+              <Text>Edit Tag</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.button}
@@ -162,20 +162,23 @@ export default function HomeScreen() {
               <Image
                 source={require('../../../assets/images/home-screen/Delete.png')}
               />
-              <MonoText style={{color: '#F34848'}}>Delete</MonoText>
+              <Text style={{color: '#F34848'}}>Delete</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.button, styles.button_border]}
               onPress={() => {
-                router.push('/settings');
+                router.push('/settings' as any);
               }}
             >
-              <MonoText>Settings (WIP)</MonoText>
+              <Text>Settings (WIP)</Text>
             </TouchableOpacity>
           </View>
         </Popup>
         <Button title="Create" onPress={() => router.push('/text-entry')} />
-        <Button title="Settings" onPress={() => router.push('/settings')} />
+        <Button
+          title="Settings"
+          onPress={() => router.push('/settings' as any)}
+        />
       </ImageBackground>
     </SafeAreaView>
   );
