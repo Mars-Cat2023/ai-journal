@@ -21,7 +21,9 @@ export default function SettingsPage() {
         <View style={{padding: 16}}>
           <Text>Email: {email}</Text>
           <TouchableOpacity onPress={signOut} style={styles.buttonContainer}>
-            <TextInputSemiBold style={styles.buttonText}>LOGOUT</TextInputSemiBold>
+            <TextInputSemiBold style={styles.buttonText}>
+              {'LOGOUT'}
+            </TextInputSemiBold>
           </TouchableOpacity>
         </View>
       </SafeAreaView>

@@ -59,7 +59,6 @@ export default function HomeScreen() {
   useFocusEffect(
     useCallback(() => {
       // makes sure there is no syncing concurrency issues
-      let isActive = true;
 
       const checkConnectionAndSync = async () => {
         handleRefresh();
@@ -72,9 +71,7 @@ export default function HomeScreen() {
           } catch (error) {
             console.error('Sync error:', error);
           } finally {
-            if (isActive) {
-              setIsSyncing(false);
-            }
+            setIsSyncing(false);
           }
         } else {
           console.log('we are not connected to wifi or already syncing');
@@ -82,10 +79,6 @@ export default function HomeScreen() {
       };
 
       checkConnectionAndSync();
-
-      return () => {
-        isActive = false;
-      };
     }, [isConnected, journalEntries])
   );
 
